@@ -78,6 +78,13 @@ print("Root MSE: ",lassoRMSE)
 print("R2:", lassoR2)
 print("Coefficients: ", bestLasso.coef_)
 
+models = ['Linear', 'Ridge', 'Lasso']
+r2_scores = [predR2, gridR2, lassoR2]
+rmse_scores = [predRMSE, gridRMSE, lassoRMSE]
+
+summary = pd.DataFrame({'Model': models, 'R2': r2_scores, 'RMSE': rmse_scores})
+print(summary)
+
 plt.figure(figsize=(12, 5))
 
 ridgeResid=gridPred-yTest
