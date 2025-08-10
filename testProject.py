@@ -85,10 +85,15 @@ rmse_scores = [predRMSE, gridRMSE, lassoRMSE]
 summary = pd.DataFrame({'Model': models, 'R2': r2_scores, 'RMSE': rmse_scores})
 print(summary)
 
-plt.figure(figsize=(12, 5))
+plt.figure(figsize=(18, 5))
+
+plt.subplot(1, 3, 1)
+corr_matrix = df.corr()
+sns.heatmap(corr_matrix, annot=False, cmap='coolwarm', center=0, cbar=False)
+plt.title("Feature Correlation Heatmap")
 
 ridgeResid=gridPred-yTest
-plt.subplot(1, 2, 1)
+plt.subplot(1, 3, 2)
 plt.scatter(yTest, ridgeResid)
 plt.xlabel("Actual block median value")
 plt.ylabel("Ridge model residual")
@@ -96,7 +101,7 @@ plt.title("Ridge regression residual plot")
 plt.axhline(y=0,color='r')
 
 lassoResid = lassoPred - yTest
-plt.subplot(1, 2, 2)
+plt.subplot(1, 3, 3)
 plt.scatter(yTest, lassoResid)
 plt.xlabel("Actual block median value")
 plt.ylabel("Lasso model residual")
